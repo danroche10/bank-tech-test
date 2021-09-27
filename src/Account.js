@@ -24,7 +24,11 @@ class Account {
   //   return this._transactions;
   // }
 
-  accountStatement() {}
+  accountStatement() {
+    if (this._transactions.length === 0) {
+      return 'date || credit || debit || balance';
+    }
+  }
 }
 
 module.exports = Account;
