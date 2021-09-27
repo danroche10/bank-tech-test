@@ -57,5 +57,12 @@ describe('Account', function () {
         'date || credit || debit || balance'
       );
     });
+
+    it('returns correct account statement after 1 deposit', function () {
+      account.addTransaction(100);
+      expect(account.accountStatement()).toEqual(
+        'date || credit || debit || balance\n10/01/2023 || 1000.00 || || 1000.00'
+      );
+    });
   });
 });

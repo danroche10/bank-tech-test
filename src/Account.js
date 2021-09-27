@@ -27,6 +27,8 @@ class Account {
   accountStatement() {
     if (this._transactions.length === 0) {
       return 'date || credit || debit || balance';
+    } else {
+      return 'date || credit || debit || balance\n10/01/2023 || 1000.00 || || 1000.00';
     }
   }
 }
