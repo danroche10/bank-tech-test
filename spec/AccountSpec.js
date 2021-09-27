@@ -1,5 +1,5 @@
 describe('Account', function () {
-  const Account = require('../../src/Account');
+  const Account = require('../src/Account');
   let account;
 
   beforeEach(function () {
