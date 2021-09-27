@@ -12,17 +12,19 @@ class Account {
     this._transactions.push(transactionObject);
   }
 
-  showCurrentBalance() {
-    let balance = 0;
-    this._transactions.forEach((transaction) => {
-      balance += transaction.transactionValue;
-    });
-    return balance;
-  }
+  // showCurrentBalance() {
+  //   let balance = 0;
+  //   this._transactions.forEach((transaction) => {
+  //     balance += transaction.transactionValue;
+  //   });
+  //   return balance;
+  // }
 
   transactionHistory() {
     return this._transactions;
   }
+
+  accountStatement() {}
 }
 
 module.exports = Account;
