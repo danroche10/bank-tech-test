@@ -20,9 +20,9 @@ class Account {
   //   return balance;
   // }
 
-  transactionHistory() {
-    return this._transactions;
-  }
+  // transactionHistory() {
+  //   return this._transactions;
+  // }
 
   accountStatement() {}
 }
