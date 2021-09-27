@@ -18,4 +18,12 @@ describe('Client', function () {
       expect(account.addTransaction).toHaveBeenCalledWith(100);
     });
   });
+
+  describe('withdraws funds from account', function () {
+    it('calls updateBalance from user class with correct argument', function () {
+      spyOn(account, 'addTransaction').and.returnValues(true);
+      client.withdraw(100);
+      expect(account.addTransaction).toHaveBeenCalledWith(-100);
+    });
+  });
 });

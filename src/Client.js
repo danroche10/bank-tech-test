@@ -6,7 +6,11 @@ class Client {
     this.clientAccount = this.accountClass.createAccount();
   }
   deposit(amount) {
-    this.clientAccount.addTransaction(100);
+    this.clientAccount.addTransaction(amount);
+  }
+
+  withdraw(amount) {
+    this.clientAccount.addTransaction(amount * -1);
   }
 }
 
