@@ -11,5 +11,17 @@ describe('Account', function () {
       account.addTransaction(100);
       expect(account.showCurrentBalance()).toEqual(100);
     });
+
+    it('returns correct balance after two transactions', function () {
+      account.addTransaction(100);
+      account.addTransaction(100);
+      expect(account.showCurrentBalance()).toEqual(200);
+    });
+
+    it('returns correct balance after two transactions, one positive, one negative', function () {
+      account.addTransaction(100);
+      account.addTransaction(-100);
+      expect(account.showCurrentBalance()).toEqual(0);
+    });
   });
 });
