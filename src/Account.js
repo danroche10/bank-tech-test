@@ -1,7 +1,7 @@
 class Account {
   constructor() {
     this._transactions = [];
-    this._accountHeaders = 'date || credit || debit || balance';
+    this._accountStatementHeaders = 'date || credit || debit || balance';
   }
 
   addTransaction(transactionValue) {
@@ -13,22 +13,10 @@ class Account {
     this._transactions.push(transactionObject);
   }
 
-  // showCurrentBalance() {
-  //   let balance = 0;
-  //   this._transactions.forEach((transaction) => {
-  //     balance += transaction.transactionValue;
-  //   });
-  //   return balance;
-  // }
-
-  // transactionHistory() {
-  //   return this._transactions;
-  // }
-
   // relating to statement
   accountStatement() {
     if (this._isTransactionHistoryEmpty()) {
-      return this._accountHeaders;
+      return this.__accountStatementHeaders;
     } else {
       return this._createAccountStatement();
     }
@@ -46,7 +34,7 @@ class Account {
         balance
       );
     });
-    return this._accountHeaders + statementString;
+    return this._accountStatementHeaders + statementString;
   }
 
   // relating to statement

@@ -12,6 +12,10 @@ class Client {
   withdraw(amount) {
     this.clientAccount.addTransaction(amount * -1);
   }
+
+  printStatement() {
+    console.log(this.clientAccount.accountStatement());
+  }
 }
 
 module.exports = Client;
