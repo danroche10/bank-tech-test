@@ -1,6 +1,7 @@
 class Account {
   constructor() {
     this._transactions = [];
+    this._accountHeaders = 'date || credit || debit || balance';
   }
 
   addTransaction(transactionValue) {
@@ -24,29 +25,70 @@ class Account {
   //   return this._transactions;
   // }
 
+  // relating to statement
   accountStatement() {
-    const columnHeaders = 'date || credit || debit || balance';
-    if (this._transactions.length === 0) {
-      return columnHeaders;
+    if (this._isTransactionHistoryEmpty()) {
+      return this._accountHeaders;
     } else {
-      let statementString = '';
-      let balance = 0;
-      this._transactions.forEach((transaction) => {
-        balance += transaction.transactionValue;
-        statementString += `\n${transaction.transactionDate} || `;
-        if (transaction.transactionValue > 0) {
-          statementString += `${transaction.transactionValue.toFixed(
-            2
-          )} || || `;
-        } else {
-          statementString += `|| ${(-1 * transaction.transactionValue).toFixed(
-            2
-          )} || `;
-        }
-        statementString += `${balance.toFixed(2)}`;
-      });
-      return columnHeaders + statementString;
+      return this._createAccountStatement();
     }
+  }
+
+  // relating to statement
+  _createAccountStatement() {
+    let statementString = '';
+    let balance = 0;
+    this._transactions.forEach((transaction) => {
+      balance += transaction.transactionValue;
+      statementString += this._singleTransactionString(
+        transaction.transactionDate,
+        transaction.transactionValue,
+        balance
+      );
+    });
+    return this._accountHeaders + statementString;
+  }
+
+  // relating to statement
+  _singleTransactionString(transactionDate, transactionValue, balance) {
+    return `${this._createDateString(
+      transactionDate
+    )}${this._createTransactionValueString(
+      transactionValue
+    )}${this._createBalanceString(balance)}`;
+  }
+
+  // relating to statement
+  _createTransactionValueString(transactionValue) {
+    if (transactionValue > 0) {
+      return this._createDepositString(transactionValue);
+    } else {
+      return this._createWithdrawalString(transactionValue);
+    }
+  }
+
+  // relating to statement
+  _createBalanceString(balance) {
+    return `${balance.toFixed(2)}`;
+  }
+
+  // relating to statement
+  _createDateString(transactionDate) {
+    return `\n${transactionDate} || `;
+  }
+
+  _createDepositString(amount) {
+    return `${amount.toFixed(2)} || || `;
+  }
+
+  // relating to statement
+  _createWithdrawalString(amount) {
+    return `|| ${(-1 * amount).toFixed(2)} || `;
+  }
+
+  // relating to statement
+  _isTransactionHistoryEmpty() {
+    this._transactions.length === 0 ? true : false;
   }
 }
 
@@ -55,5 +97,5 @@ module.exports = Account;
 let account;
 account = new Account();
 account.addTransaction(1000);
-account.addTransaction(2000);
-console.log(account.accountStatement());
+account.addTransaction(-1000);
+console.log(account._createAccountStatement());
