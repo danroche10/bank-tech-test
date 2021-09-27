@@ -7,7 +7,7 @@ class Account {
     // Should transaction be its own class ??
     const transactionObject = {
       transactionValue: transactionValue,
-      transactionDate: 27 / 9 / 2021,
+      transactionDate: new Date().toLocaleDateString(),
     };
     this._transactions.push(transactionObject);
   }
@@ -19,6 +19,15 @@ class Account {
     });
     return balance;
   }
+
+  transactionHistory() {
+    return this._transactions;
+  }
 }
 
 module.exports = Account;
+
+let account;
+account = new Account();
+account.addTransaction(100);
+console.log(account._transactions);
