@@ -25,10 +25,27 @@ class Account {
   // }
 
   accountStatement() {
+    const columnHeaders = 'date || credit || debit || balance';
     if (this._transactions.length === 0) {
-      return 'date || credit || debit || balance';
+      return columnHeaders;
     } else {
-      return 'date || credit || debit || balance\n10/01/2023 || 1000.00 || || 1000.00';
+      let statementString = '';
+      let balance = 0;
+      this._transactions.forEach((transaction) => {
+        balance += transaction.transactionValue;
+        statementString += `\n${transaction.transactionDate} || `;
+        if (transaction.transactionValue > 0) {
+          statementString += `${transaction.transactionValue.toFixed(
+            2
+          )} || || `;
+        } else {
+          statementString += `|| ${(-1 * transaction.transactionValue).toFixed(
+            2
+          )} || `;
+        }
+        statementString += `${balance.toFixed(2)}`;
+      });
+      return columnHeaders + statementString;
     }
   }
 }
@@ -37,5 +54,6 @@ module.exports = Account;
 
 let account;
 account = new Account();
-account.addTransaction(100);
-console.log(account._transactions);
+account.addTransaction(1000);
+account.addTransaction(2000);
+console.log(account.accountStatement());
