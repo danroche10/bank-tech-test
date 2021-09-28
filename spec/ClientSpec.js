@@ -7,7 +7,9 @@ describe('Client', function () {
   beforeEach(function () {
     account = {
       addTransaction: () => {},
-      accountStatement: () => {},
+      accountStatement: () => {
+        return `date || credit || debit || balance\n${currentDate} || 2000.00 || || 2000.00\n${currentDate} || || 1000.00 || 1000.00`;
+      },
     };
     spyOn(AccountFactory, 'createAccount').and.returnValue(account);
     client = new Client(AccountFactory);
@@ -36,14 +38,10 @@ describe('Client', function () {
       expect(account.accountStatement).toHaveBeenCalled();
     });
 
-    // console.log(not being called in printStatement method)
     it('console.logs stubbed method', function () {
-      spyOn(account, 'accountStatement').and.returnValues(
-        `date || credit || debit || balance\n${currentDate} || 2000.00 || || 2000.00\n${currentDate} || || 1000.00 || 1000.00`
-      );
       console.log = jasmine.createSpy('log');
       client.printStatement();
-      expect(console.log).toHaveBeenCalledWith(account.accountStatement);
+      expect(console.log).toHaveBeenCalledWith(account.accountStatement());
     });
   });
 });
