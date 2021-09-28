@@ -1,16 +1,21 @@
 describe('Account', function () {
   const Account = require('../src/Account');
   const AccountStatementFactory = require('../src/factoryClasses/AccountStatementFactory');
+  const TransactionFactory = require('../src/factoryClasses/TransactionFactory');
   let account;
 
   beforeEach(function () {
     accountStatement = {
       createAccountStatement: () => {},
     };
+    transaction = {
+      transactionDetails: () => {},
+    };
     spyOn(AccountStatementFactory, 'createAccountStatement').and.returnValue(
       accountStatement
     );
-    account = new Account(AccountStatementFactory);
+    spyOn(TransactionFactory, 'createTransaction').and.returnValue(transaction);
+    account = new Account();
   });
 
   describe('call createAccountStatement from accountStatement class with transaction history as arg', function () {

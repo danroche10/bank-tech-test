@@ -25,11 +25,9 @@ class AccountStatement {
   }
 
   _createTransactionValueString(transactionValue) {
-    if (transactionValue > 0) {
-      return this._createDepositString(transactionValue);
-    } else {
-      return this._createWithdrawalString(transactionValue);
-    }
+    return transactionValue > 0
+      ? this._createDepositString(transactionValue)
+      : this._createWithdrawalString(transactionValue);
   }
 
   _createBalanceString(balance) {
