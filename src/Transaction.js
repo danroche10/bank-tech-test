@@ -1,5 +1,5 @@
 class Transaction {
-  constructor(transactionDate = new Date().toLocaleDateString()) {
+  constructor(transactionDate = new Date()) {
     this._transactionDate = transactionDate;
   }
 

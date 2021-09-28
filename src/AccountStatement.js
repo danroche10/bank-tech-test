@@ -6,9 +6,10 @@ class AccountStatement {
     let statementString = '';
     let balance = 0;
     transactions.forEach((transaction) => {
+      console.log('line 9', transaction);
       balance += transaction.transactionValue;
       statementString += this._singleTransactionString(
-        transaction.transactionDate,
+        transaction.transactionDate.toLocaleDateString(),
         transaction.transactionValue,
         balance
       );
