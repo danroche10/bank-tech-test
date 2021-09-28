@@ -3,15 +3,15 @@ class Transaction {
     this._transactionDate = transactionDate;
   }
 
-  _transactionType() {
-    return this._transactionValue > 0 ? 'deposit' : 'withdrawal';
+  _transactionType(transactionValue) {
+    return transactionValue > 0 ? 'deposit' : 'withdrawal';
   }
 
   transactionDetails(transactionValue) {
     return {
       transactionValue: transactionValue,
       transactionDate: this._transactionDate,
-      transactionType: this._transactionType(),
+      transactionType: this._transactionType(transactionValue),
     };
   }
 }
