@@ -25,5 +25,15 @@ describe('Transaction', function () {
         transactionType: 'withdrawal',
       });
     });
+
+    it('shows the correct date when a custom one is entered that is not today', function () {
+      transaction = new Transaction('10/5/2021');
+      transactionValue = 500;
+      expect(transaction.transactionDetails(transactionValue)).toEqual({
+        transactionValue: transactionValue,
+        transactionDate: '10/5/2021',
+        transactionType: 'deposit',
+      });
+    });
   });
 });
