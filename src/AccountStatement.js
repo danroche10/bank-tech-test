@@ -1,5 +1,8 @@
 class AccountStatement {
-  createAccountStatement(transactions, statementHeaders) {
+  constructor() {
+    this._accountStatementHeaders = 'date || credit || debit || balance';
+  }
+  createAccountStatement(transactions) {
     let statementString = '';
     let balance = 0;
     transactions.forEach((transaction) => {
@@ -10,7 +13,7 @@ class AccountStatement {
         balance
       );
     });
-    return statementHeaders + statementString;
+    return this._accountStatementHeaders + statementString;
   }
 
   _singleTransactionString(transactionDate, transactionValue, balance) {
