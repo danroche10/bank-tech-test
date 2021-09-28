@@ -2,7 +2,7 @@ class AccountStatement {
   constructor() {
     this._accountStatementHeaders = 'date || credit || debit || balance';
   }
-  createAccountStatement(transactions) {
+  newAccountStatement(transactions) {
     let statementString = '';
     let balance = 0;
     transactions.forEach((transaction) => {

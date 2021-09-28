@@ -13,19 +13,14 @@ class Account {
     this._transactions = [];
   }
 
-  // Should transaction be its own class ??
   addTransaction(transactionValue) {
-    // const transactionObject = {
-    //   transactionValue: transactionValue,
-    //   transactionDate: new Date().toLocaleDateString(),
-    // };
     const newTransaction =
       this._currentTransaction.transactionDetails(transactionValue);
     this._transactions.push(newTransaction);
   }
 
   accountStatement() {
-    return this._account.createAccountStatement(this._transactions);
+    return this._account.newAccountStatement(this._transactions);
   }
 
   _isTransactionHistoryEmpty() {
@@ -41,3 +36,4 @@ account.addTransaction(1000);
 // account.addTransaction(1000);
 // account.addTransaction(-1000);
 console.log(account._transactions);
+console.log(account.accountStatement());

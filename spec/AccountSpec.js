@@ -6,7 +6,7 @@ describe('Account', function () {
 
   beforeEach(function () {
     accountStatement = {
-      createAccountStatement: () => {},
+      newAccountStatement: () => {},
     };
     transaction = {
       transactionDetails: () => {},
@@ -15,34 +15,46 @@ describe('Account', function () {
       accountStatement
     );
     spyOn(TransactionFactory, 'createTransaction').and.returnValue(transaction);
-    account = new Account();
+    account = new Account(AccountStatementFactory, TransactionFactory);
   });
 
-  describe('call createAccountStatement from accountStatement class with transaction history as arg', function () {
+  describe('call newAccountStatement from accountStatement class with transaction history as arg', function () {
     const currentDate = new Date().toLocaleDateString();
-    it('calls createAccountStatement with empty array as arg', function () {
-      spyOn(accountStatement, 'createAccountStatement').and.returnValues(true);
+    const fakeDepositTransaction = {
+      transactionValue: 1000,
+      transactionDate: currentDate,
+      transactionType: 'deposit',
+    };
+    it('calls newAccountStatement with empty array as arg', function () {
+      spyOn(accountStatement, 'newAccountStatement').and.returnValues(true);
       account.accountStatement();
-      expect(accountStatement.createAccountStatement).toHaveBeenCalledWith([]);
+      expect(accountStatement.newAccountStatement).toHaveBeenCalledWith([]);
     });
 
-    it('calls createAccountStatement with correct array as arg (including transaction Value and date) after 1 transaction', function () {
-      spyOn(accountStatement, 'createAccountStatement').and.returnValues(true);
+    it('calls newAccountStatement with correct array as arg (including transaction Value and date) after 1 transaction', function () {
+      spyOn(accountStatement, 'newAccountStatement').and.returnValues(true);
+      spyOn(transaction, 'transactionDetails').and.returnValues(
+        fakeDepositTransaction
+      );
       account.addTransaction(1000);
       account.accountStatement();
-      expect(accountStatement.createAccountStatement).toHaveBeenCalledWith([
-        { transactionValue: 1000, transactionDate: currentDate },
+      expect(accountStatement.newAccountStatement).toHaveBeenCalledWith([
+        fakeDepositTransaction,
       ]);
     });
 
-    it('calls createAccountStatement with correct array as arg (including transaction Value and date) after 2 deposit transactions', function () {
-      spyOn(accountStatement, 'createAccountStatement').and.returnValues(true);
+    it('calls newAccountStatement with correct array as arg (including transaction Value and date) after 2 deposit transactions', function () {
+      spyOn(accountStatement, 'newAccountStatement').and.returnValues(true);
+      spyOn(transaction, 'transactionDetails').and.returnValues(
+        fakeDepositTransaction,
+        fakeDepositTransaction
+      );
       account.addTransaction(1000);
       account.addTransaction(1000);
       account.accountStatement();
-      expect(accountStatement.createAccountStatement).toHaveBeenCalledWith([
-        { transactionValue: 1000, transactionDate: currentDate },
-        { transactionValue: 1000, transactionDate: currentDate },
+      expect(accountStatement.newAccountStatement).toHaveBeenCalledWith([
+        fakeDepositTransaction,
+        fakeDepositTransaction,
       ]);
     });
   });

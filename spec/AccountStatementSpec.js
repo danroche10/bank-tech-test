@@ -14,7 +14,7 @@ describe('AccountStatement', function () {
     it('returns empty account statement after zero transactions', function () {
       transactions = [];
       expect(
-        accountStatement.createAccountStatement(
+        accountStatement.newAccountStatement(
           transactions,
           accountStatementHeaders
         )
@@ -24,7 +24,7 @@ describe('AccountStatement', function () {
     it('returns correct account statement after one deposit transactions', function () {
       transactions = [{ transactionValue: 1000, transactionDate: currentDate }];
       expect(
-        accountStatement.createAccountStatement(
+        accountStatement.newAccountStatement(
           transactions,
           accountStatementHeaders
         )
@@ -39,7 +39,7 @@ describe('AccountStatement', function () {
         { transactionValue: 1000, transactionDate: currentDate },
       ];
       expect(
-        accountStatement.createAccountStatement(
+        accountStatement.newAccountStatement(
           transactions,
           accountStatementHeaders
         )
@@ -55,7 +55,7 @@ describe('AccountStatement', function () {
         { transactionValue: -1000, transactionDate: '9/28/2021' },
       ];
       expect(
-        accountStatement.createAccountStatement(
+        accountStatement.newAccountStatement(
           transactions,
           accountStatementHeaders
         )
