@@ -29,7 +29,7 @@ module.exports = Account;
 
 let account;
 account = new Account();
-// account.addTransaction(1000);
+account.addTransaction(1000);
 // account.addTransaction(1000);
 // account.addTransaction(-1000);
-console.log(account.accountStatement());
+console.log(account._transactions);
