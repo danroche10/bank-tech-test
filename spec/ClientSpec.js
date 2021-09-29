@@ -1,7 +1,7 @@
 describe('Client', function () {
   const Client = require('../src/Client');
   const AccountFactory = require('../src/factoryClasses/AccountFactory');
-  const currentDate = new Date().toLocaleDateString();
+  const currentDate = new Date();
   const followingDay = new Date(new Date().getTime() + 86400000);
   const twoDaysAfter = new Date(new Date().getTime() + 86400000 * 2);
   let client;
