@@ -44,10 +44,10 @@ class AccountStatement {
   }
 
   _createDateString(transactionDate) {
-    return `${this._dateConverter(transactionDate)} || `;
+    return `${this._convertDateToUKFormat(transactionDate)} || `;
   }
 
-  _dateConverter(date) {
+  _convertDateToUKFormat(date) {
     const dd = String(date.getDate()).padStart(2, '0');
     const mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = date.getFullYear();
@@ -64,6 +64,3 @@ class AccountStatement {
 }
 
 module.exports = AccountStatement;
-
-let as = new AccountStatement();
-console.log(as._dateConverter(new Date()));

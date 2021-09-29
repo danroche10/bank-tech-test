@@ -47,7 +47,7 @@ describe('AccountStatement', function () {
         )
       ).toEqual([
         `date || credit || debit || balance`,
-        `${accountStatement._dateConverter(
+        `${accountStatement._convertDateToUKFormat(
           currentDate
         )} || 1000.00 || || 1000.00`,
       ]);
@@ -62,10 +62,10 @@ describe('AccountStatement', function () {
         )
       ).toEqual([
         `date || credit || debit || balance`,
-        `${accountStatement._dateConverter(
+        `${accountStatement._convertDateToUKFormat(
           currentDate
         )} || 1000.00 || || 2000.00`,
-        `${accountStatement._dateConverter(
+        `${accountStatement._convertDateToUKFormat(
           currentDate
         )} || 1000.00 || || 1000.00`,
       ]);
@@ -84,13 +84,13 @@ describe('AccountStatement', function () {
         )
       ).toEqual([
         `date || credit || debit || balance`,
-        `${accountStatement._dateConverter(
+        `${accountStatement._convertDateToUKFormat(
           currentDate
         )} || || 1000.00 || 1000.00`,
-        `${accountStatement._dateConverter(
+        `${accountStatement._convertDateToUKFormat(
           currentDate
         )} || 1000.00 || || 2000.00`,
-        `${accountStatement._dateConverter(
+        `${accountStatement._convertDateToUKFormat(
           currentDate
         )} || 1000.00 || || 1000.00`,
       ]);
@@ -107,10 +107,10 @@ describe('AccountStatement', function () {
         )
       ).toEqual([
         `date || credit || debit || balance`,
-        `${accountStatement._dateConverter(
+        `${accountStatement._convertDateToUKFormat(
           followingDay
         )} || 2000.00 || || 3000.00`,
-        `${accountStatement._dateConverter(
+        `${accountStatement._convertDateToUKFormat(
           currentDate
         )} || 1000.00 || || 1000.00`,
       ]);
@@ -133,13 +133,13 @@ describe('AccountStatement', function () {
         )
       ).toEqual([
         `date || credit || debit || balance`,
-        `${accountStatement._dateConverter(
+        `${accountStatement._convertDateToUKFormat(
           twoDaysAfter
         )} || 2000.00 || || 5000.00`,
-        `${accountStatement._dateConverter(
+        `${accountStatement._convertDateToUKFormat(
           followingDay
         )} || 2000.00 || || 3000.00`,
-        `${accountStatement._dateConverter(
+        `${accountStatement._convertDateToUKFormat(
           currentDate
         )} || 1000.00 || || 1000.00`,
       ]);
@@ -162,13 +162,13 @@ describe('AccountStatement', function () {
         )
       ).toEqual([
         `date || credit || debit || balance`,
-        `${accountStatement._dateConverter(
+        `${accountStatement._convertDateToUKFormat(
           twoDaysAfter
         )} || || 1000.00 || 2000.00`,
-        `${accountStatement._dateConverter(
+        `${accountStatement._convertDateToUKFormat(
           followingDay
         )} || 2000.00 || || 3000.00`,
-        `${accountStatement._dateConverter(
+        `${accountStatement._convertDateToUKFormat(
           currentDate
         )} || 1000.00 || || 1000.00`,
       ]);
