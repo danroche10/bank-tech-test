@@ -50,7 +50,7 @@ jasmine
 
 ## User Stories
 
-I used Jamboard to model the program. I ended having an additional Transaction class compared the initial diagram
+I used Jamboard to model the program. I ended up having an additional `Transaction` class compared with the initial diagram.
 
 ## Class Diagram v1
 
@@ -60,11 +60,13 @@ I used Jamboard to model the program. I ended having an additional Transaction c
 
 - Once I was happy with my domain model, I did some research on the 4 key pillars of OOP to ensure that my program was going to adhere to these principles
 
-- I then began building the account class using TDD. I then did the same for a Client class to provide a clear public interface for the user to interact with.
+- I then began building the `Account` class using TDD. I did the same for a `Client` class to provide a clear public interface for the user to interact with.
 
-- I found that that these two classes could manage most of the required functionality. I decided to extract logic out of the Account class into Transaction class and Account Statement to ensure alignment to OOP best practices.
+- I found that these two classes could manage most of the required functionality. I decided to extract logic out of the `Account` class into `Transaction` class and `AccountStatement` to ensure alignment to OOP best practices.
 
-- To help me with the above extraction I drew out a simple diagram to help me visualise the information flows
+- To help me with the above extraction I drew out a simple diagram to help me visualise the information flows.
+
+- My program ended up being quite different from the initial domain model. I'm ok with this because I think trying to overplan everything at the start can lead to inflexibility and path dependence. Therefore I like to have a solid plan of the key parts of the program while leaving flexiblity for some of the details to be decided.
 
 <img src="images/planning1.jpg" alt="second class diagram" width="600"/>
 
