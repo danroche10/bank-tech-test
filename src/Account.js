@@ -10,21 +10,21 @@ class Account {
     this._transactionClass = transactionFactory;
     this._account = this._accountStatementClass.createAccountStatement();
     this._currentTransaction = this._transactionClass.createTransaction();
-    this._transactions = [];
+    this._transactionHistory = [];
   }
 
   addTransaction(transactionValue) {
     const newTransaction =
       this._currentTransaction.transactionDetails(transactionValue);
-    this._transactions.push(newTransaction);
+    this._transactionHistory.push(newTransaction);
   }
 
   accountStatement() {
-    return this._account.newAccountStatement(this._transactions);
+    return this._account.newAccountStatement(this._transactionHistory);
   }
 
   _isTransactionHistoryEmpty() {
-    this._transactions.length === 0 ? true : false;
+    this._transactionHistory.length === 0 ? true : false;
   }
 }
 
