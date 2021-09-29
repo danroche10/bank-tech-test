@@ -3,20 +3,23 @@ class AccountStatement {
     this._accountStatementHeaders = 'date || credit || debit || balance';
   }
   newAccountStatement(transactions) {
-    let statementString = '';
+    let statement = [];
     let balance = 0;
+
     transactions.forEach((transaction) => {
-      console.log('line 9', transaction);
       balance += transaction.transactionValue;
-      statementString += this._singleTransactionString(
-        transaction.transactionDate.toLocaleDateString(),
-        transaction.transactionValue,
-        balance
+      statement.unshift(
+        this._singleTransactionString(
+          transaction.transactionDate.toLocaleDateString(),
+          transaction.transactionValue,
+          balance
+        )
       );
     });
-    return this._accountStatementHeaders + statementString;
+    statement.unshift(this._accountStatementHeaders);
+    console.log('line 20', statement);
+    return statement;
   }
-
   _singleTransactionString(transactionDate, transactionValue, balance) {
     return `${this._createDateString(
       transactionDate
@@ -36,7 +39,7 @@ class AccountStatement {
   }
 
   _createDateString(transactionDate) {
-    return `\n${transactionDate} || `;
+    return `${transactionDate} || `;
   }
 
   _createDepositString(amount) {
