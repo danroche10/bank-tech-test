@@ -47,7 +47,9 @@ describe('AccountStatement', function () {
         )
       ).toEqual([
         `date || credit || debit || balance`,
-        `${currentDate.toLocaleDateString()} || 1000.00 || || 1000.00`,
+        `${accountStatement._dateConverter(
+          currentDate
+        )} || 1000.00 || || 1000.00`,
       ]);
     });
 
@@ -60,8 +62,12 @@ describe('AccountStatement', function () {
         )
       ).toEqual([
         `date || credit || debit || balance`,
-        `${currentDate.toLocaleDateString()} || 1000.00 || || 2000.00`,
-        `${currentDate.toLocaleDateString()} || 1000.00 || || 1000.00`,
+        `${accountStatement._dateConverter(
+          currentDate
+        )} || 1000.00 || || 2000.00`,
+        `${accountStatement._dateConverter(
+          currentDate
+        )} || 1000.00 || || 1000.00`,
       ]);
     });
 
@@ -78,9 +84,15 @@ describe('AccountStatement', function () {
         )
       ).toEqual([
         `date || credit || debit || balance`,
-        `${currentDate.toLocaleDateString()} || || 1000.00 || 1000.00`,
-        `${currentDate.toLocaleDateString()} || 1000.00 || || 2000.00`,
-        `${currentDate.toLocaleDateString()} || 1000.00 || || 1000.00`,
+        `${accountStatement._dateConverter(
+          currentDate
+        )} || || 1000.00 || 1000.00`,
+        `${accountStatement._dateConverter(
+          currentDate
+        )} || 1000.00 || || 2000.00`,
+        `${accountStatement._dateConverter(
+          currentDate
+        )} || 1000.00 || || 1000.00`,
       ]);
     });
     it('returns correct account statement after two deposit transactions on different dates', function () {
@@ -95,8 +107,12 @@ describe('AccountStatement', function () {
         )
       ).toEqual([
         `date || credit || debit || balance`,
-        `${followingDay.toLocaleDateString()} || 2000.00 || || 3000.00`,
-        `${currentDate.toLocaleDateString()} || 1000.00 || || 1000.00`,
+        `${accountStatement._dateConverter(
+          followingDay
+        )} || 2000.00 || || 3000.00`,
+        `${accountStatement._dateConverter(
+          currentDate
+        )} || 1000.00 || || 1000.00`,
       ]);
     });
 
@@ -117,9 +133,15 @@ describe('AccountStatement', function () {
         )
       ).toEqual([
         `date || credit || debit || balance`,
-        `${twoDaysAfter.toLocaleDateString()} || 2000.00 || || 5000.00`,
-        `${followingDay.toLocaleDateString()} || 2000.00 || || 3000.00`,
-        `${currentDate.toLocaleDateString()} || 1000.00 || || 1000.00`,
+        `${accountStatement._dateConverter(
+          twoDaysAfter
+        )} || 2000.00 || || 5000.00`,
+        `${accountStatement._dateConverter(
+          followingDay
+        )} || 2000.00 || || 3000.00`,
+        `${accountStatement._dateConverter(
+          currentDate
+        )} || 1000.00 || || 1000.00`,
       ]);
     });
 
@@ -140,9 +162,15 @@ describe('AccountStatement', function () {
         )
       ).toEqual([
         `date || credit || debit || balance`,
-        `${twoDaysAfter.toLocaleDateString()} || || 1000.00 || 2000.00`,
-        `${followingDay.toLocaleDateString()} || 2000.00 || || 3000.00`,
-        `${currentDate.toLocaleDateString()} || 1000.00 || || 1000.00`,
+        `${accountStatement._dateConverter(
+          twoDaysAfter
+        )} || || 1000.00 || 2000.00`,
+        `${accountStatement._dateConverter(
+          followingDay
+        )} || 2000.00 || || 3000.00`,
+        `${accountStatement._dateConverter(
+          currentDate
+        )} || 1000.00 || || 1000.00`,
       ]);
     });
   });

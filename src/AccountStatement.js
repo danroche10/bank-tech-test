@@ -44,7 +44,14 @@ class AccountStatement {
   }
 
   _createDateString(transactionDate) {
-    return `${transactionDate.toLocaleDateString('en-GB')} || `;
+    return `${this._dateConverter(transactionDate)} || `;
+  }
+
+  _dateConverter(date) {
+    const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const yyyy = date.getFullYear();
+    return dd + '/' + mm + '/' + yyyy;
   }
 
   _createDepositString(amount) {
@@ -57,3 +64,6 @@ class AccountStatement {
 }
 
 module.exports = AccountStatement;
+
+let as = new AccountStatement();
+console.log(as._dateConverter(new Date()));
