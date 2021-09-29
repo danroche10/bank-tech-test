@@ -9,7 +9,7 @@ class AccountStatement {
       balance += transaction.transactionValue;
       statement.unshift(
         this._singleTransactionString(
-          transaction.transactionDate.toLocaleDateString(),
+          transaction.transactionDate,
           transaction.transactionValue,
           balance,
           transaction.transactionType
@@ -44,7 +44,7 @@ class AccountStatement {
   }
 
   _createDateString(transactionDate) {
-    return `${transactionDate} || `;
+    return `${transactionDate.toLocaleDateString('en-GB')} || `;
   }
 
   _createDepositString(amount) {

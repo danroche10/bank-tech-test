@@ -22,15 +22,3 @@ class Client {
 }
 
 module.exports = Client;
-
-let account;
-let client;
-// account = AccountFactory.createAccount();
-client = new Client();
-client.deposit(1000);
-client.withdraw(1000);
-client.deposit(1000);
-client.withdraw(4000);
-client.printStatement();
-// console.log(account._transactions);
-// console.log('line 35', client.printStatement());
