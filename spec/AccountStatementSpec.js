@@ -1,4 +1,4 @@
-fdescribe('AccountStatement', function () {
+describe('AccountStatement', function () {
   const AccountStatement = require('../src/AccountStatement');
   let accountStatement;
   let accountStatementHeaders;
@@ -26,7 +26,7 @@ fdescribe('AccountStatement', function () {
     const fakeWithdrawalTransactionToday = {
       transactionValue: -1000,
       transactionDate: currentDate,
-      transactionType: 'withdrawl',
+      transactionType: 'withdrawal',
     };
     it('returns empty account statement after zero transactions', function () {
       transactions = [];
@@ -104,7 +104,11 @@ fdescribe('AccountStatement', function () {
       transactions = [
         fakeDepositTransactionToday,
         fakeDepositTransactionFollowinDay,
-        { transactionValue: 2000, transactionDate: twoDaysAfter },
+        {
+          transactionValue: 2000,
+          transactionDate: twoDaysAfter,
+          transactionType: 'deposit',
+        },
       ];
       expect(
         accountStatement.newAccountStatement(
@@ -123,7 +127,11 @@ fdescribe('AccountStatement', function () {
       transactions = [
         fakeDepositTransactionToday,
         fakeDepositTransactionFollowinDay,
-        { transactionValue: -1000, transactionDate: twoDaysAfter },
+        {
+          transactionValue: -1000,
+          transactionDate: twoDaysAfter,
+          transactionType: 'withdrawal',
+        },
       ];
       expect(
         accountStatement.newAccountStatement(

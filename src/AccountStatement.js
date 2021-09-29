@@ -11,23 +11,30 @@ class AccountStatement {
         this._singleTransactionString(
           transaction.transactionDate.toLocaleDateString(),
           transaction.transactionValue,
-          balance
+          balance,
+          transaction.transactionType
         )
       );
     });
     statement.unshift(this._accountStatementHeaders);
     return statement;
   }
-  _singleTransactionString(transactionDate, transactionValue, balance) {
+  _singleTransactionString(
+    transactionDate,
+    transactionValue,
+    balance,
+    transactionType
+  ) {
     return `${this._createDateString(
       transactionDate
     )}${this._createTransactionValueString(
-      transactionValue
+      transactionValue,
+      transactionType
     )}${this._createBalanceString(balance)}`;
   }
 
-  _createTransactionValueString(transactionValue) {
-    return transactionValue > 0
+  _createTransactionValueString(transactionValue, transactionType) {
+    return transactionType === 'deposit'
       ? this._createDepositString(transactionValue)
       : this._createWithdrawalString(transactionValue);
   }

@@ -14,8 +14,22 @@ class Client {
   }
 
   printStatement() {
-    console.log(this.clientAccount.accountStatement());
+    let clientStatement = this.clientAccount.accountStatement();
+    for (let i = 0; i < clientStatement.length; i++) {
+      console.log(clientStatement[i]);
+    }
   }
 }
 
 module.exports = Client;
+
+let account;
+let client;
+// account = AccountFactory.createAccount();
+client = new Client();
+// client.deposit(1000);
+// client.deposit(1000);
+// client.deposit(1000);
+client.printStatement();
+// console.log(account._transactions);
+// console.log('line 35', client.printStatement());
