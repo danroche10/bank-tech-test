@@ -5,7 +5,6 @@ class AccountStatement {
   newAccountStatement(transactions) {
     let statement = [];
     let balance = 0;
-
     transactions.forEach((transaction) => {
       balance += transaction.transactionValue;
       statement.unshift(
@@ -17,7 +16,6 @@ class AccountStatement {
       );
     });
     statement.unshift(this._accountStatementHeaders);
-    console.log('line 20', statement);
     return statement;
   }
   _singleTransactionString(transactionDate, transactionValue, balance) {

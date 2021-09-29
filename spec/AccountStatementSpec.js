@@ -1,4 +1,4 @@
-describe('AccountStatement', function () {
+fdescribe('AccountStatement', function () {
   const AccountStatement = require('../src/AccountStatement');
   let accountStatement;
   let accountStatementHeaders;
@@ -13,6 +13,21 @@ describe('AccountStatement', function () {
     const currentDate = new Date();
     const followingDay = new Date(currentDate.getTime() + 86400000);
     const twoDaysAfter = new Date(currentDate.getTime() + 86400000 * 2);
+    const fakeDepositTransactionToday = {
+      transactionValue: 1000,
+      transactionDate: currentDate,
+      transactionType: 'deposit',
+    };
+    const fakeDepositTransactionFollowinDay = {
+      transactionValue: 2000,
+      transactionDate: followingDay,
+      transactionType: 'deposit',
+    };
+    const fakeWithdrawalTransactionToday = {
+      transactionValue: -1000,
+      transactionDate: currentDate,
+      transactionType: 'withdrawl',
+    };
     it('returns empty account statement after zero transactions', function () {
       transactions = [];
       expect(
@@ -24,7 +39,7 @@ describe('AccountStatement', function () {
     });
 
     it('returns correct account statement after one deposit transactions', function () {
-      transactions = [{ transactionValue: 1000, transactionDate: currentDate }];
+      transactions = [fakeDepositTransactionToday];
       expect(
         accountStatement.newAccountStatement(
           transactions,
@@ -37,10 +52,7 @@ describe('AccountStatement', function () {
     });
 
     it('returns correct account statement after two deposit transactions', function () {
-      transactions = [
-        { transactionValue: 1000, transactionDate: currentDate },
-        { transactionValue: 1000, transactionDate: currentDate },
-      ];
+      transactions = [fakeDepositTransactionToday, fakeDepositTransactionToday];
       expect(
         accountStatement.newAccountStatement(
           transactions,
@@ -55,9 +67,9 @@ describe('AccountStatement', function () {
 
     it('returns correct account statement after two deposit transactions and 1 withdrawal', function () {
       transactions = [
-        { transactionValue: 1000, transactionDate: currentDate },
-        { transactionValue: 1000, transactionDate: currentDate },
-        { transactionValue: -1000, transactionDate: currentDate },
+        fakeDepositTransactionToday,
+        fakeDepositTransactionToday,
+        fakeWithdrawalTransactionToday,
       ];
       expect(
         accountStatement.newAccountStatement(
@@ -73,11 +85,8 @@ describe('AccountStatement', function () {
     });
     it('returns correct account statement after two deposit transactions on different dates', function () {
       transactions = [
-        {
-          transactionValue: 1000,
-          transactionDate: currentDate,
-        },
-        { transactionValue: 2000, transactionDate: followingDay },
+        fakeDepositTransactionToday,
+        fakeDepositTransactionFollowinDay,
       ];
       expect(
         accountStatement.newAccountStatement(
@@ -91,13 +100,10 @@ describe('AccountStatement', function () {
       ]);
     });
 
-    fit('returns correct account statement after three deposit transactions on different dates', function () {
+    it('returns correct account statement after three deposit transactions on different dates', function () {
       transactions = [
-        {
-          transactionValue: 1000,
-          transactionDate: currentDate,
-        },
-        { transactionValue: 2000, transactionDate: followingDay },
+        fakeDepositTransactionToday,
+        fakeDepositTransactionFollowinDay,
         { transactionValue: 2000, transactionDate: twoDaysAfter },
       ];
       expect(
@@ -108,6 +114,25 @@ describe('AccountStatement', function () {
       ).toEqual([
         `date || credit || debit || balance`,
         `${twoDaysAfter.toLocaleDateString()} || 2000.00 || || 5000.00`,
+        `${followingDay.toLocaleDateString()} || 2000.00 || || 3000.00`,
+        `${currentDate.toLocaleDateString()} || 1000.00 || || 1000.00`,
+      ]);
+    });
+
+    it('returns correct account statement after two deposits and one withdrawal on different dates', function () {
+      transactions = [
+        fakeDepositTransactionToday,
+        fakeDepositTransactionFollowinDay,
+        { transactionValue: -1000, transactionDate: twoDaysAfter },
+      ];
+      expect(
+        accountStatement.newAccountStatement(
+          transactions,
+          accountStatementHeaders
+        )
+      ).toEqual([
+        `date || credit || debit || balance`,
+        `${twoDaysAfter.toLocaleDateString()} || || 1000.00 || 2000.00`,
         `${followingDay.toLocaleDateString()} || 2000.00 || || 3000.00`,
         `${currentDate.toLocaleDateString()} || 1000.00 || || 1000.00`,
       ]);
