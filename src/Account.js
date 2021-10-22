@@ -22,10 +22,6 @@ class Account {
   accountStatement() {
     return this._account.newAccountStatement(this._transactionHistory);
   }
-
-  _isTransactionHistoryEmpty() {
-    this._transactionHistory.length === 0 ? true : false;
-  }
 }
 
 module.exports = Account;
