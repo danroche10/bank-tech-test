@@ -1,17 +1,17 @@
-const Client = require('../src/Client');
-const Util = require('../src/Util');
+const Client = require("../src/Client");
+const Util = require("../src/Util");
 
-describe('Client', function () {
+describe("Client", () => {
   let client;
   let currentDate;
 
-  beforeEach(function () {
+  beforeEach(() => {
     currentDate = new Date();
     client = new Client();
   });
 
-  it('returns correct amount after several deposits and withdrawals', function () {
-    console.log = jasmine.createSpy('log');
+  it("returns correct amount after several deposits and withdrawals", () => {
+    console.log = jasmine.createSpy("log");
     client.deposit(1000);
     client.withdraw(-1000);
     client.deposit(500);
@@ -19,7 +19,7 @@ describe('Client', function () {
     client.withdraw(-1500);
     client.printStatement();
     expect(console.log).toHaveBeenCalledWith(
-      `date || credit || debit || balance`
+      "date || credit || debit || balance"
     );
     expect(console.log).toHaveBeenCalledWith(
       `${Util.convertDateToUKFormat(currentDate)} || || 1500.00 || 1000.00`

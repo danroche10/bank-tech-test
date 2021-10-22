@@ -1,45 +1,46 @@
-describe('AccountStatement', function () {
-  const AccountStatement = require('../src/AccountStatement');
-  const Util = require('../src/Util');
+const AccountStatement = require("../src/AccountStatement");
+const Util = require("../src/Util");
+
+describe("AccountStatement", () => {
   let accountStatement;
   let accountStatementHeaders;
   let transactions;
 
-  beforeEach(function () {
+  beforeEach(() => {
     accountStatement = new AccountStatement();
-    accountStatementHeaders = 'date || credit || debit || balance';
+    accountStatementHeaders = "date || credit || debit || balance";
   });
 
-  describe('returns account statement', function () {
+  describe("returns account statement", () => {
     const currentDate = new Date();
     const followingDay = new Date(currentDate.getTime() + 86400000);
     const twoDaysAfter = new Date(currentDate.getTime() + 86400000 * 2);
     const fakeDepositTransactionToday = {
       transactionValue: 1000,
       transactionDate: currentDate,
-      transactionType: 'deposit',
+      transactionType: "deposit",
     };
     const fakeDepositTransactionFollowinDay = {
       transactionValue: 2000,
       transactionDate: followingDay,
-      transactionType: 'deposit',
+      transactionType: "deposit",
     };
     const fakeWithdrawalTransactionToday = {
       transactionValue: -1000,
       transactionDate: currentDate,
-      transactionType: 'withdrawal',
+      transactionType: "withdrawal",
     };
-    it('returns empty account statement after zero transactions', function () {
+    it("returns empty account statement after zero transactions", () => {
       transactions = [];
       expect(
         accountStatement.newAccountStatement(
           transactions,
           accountStatementHeaders
         )
-      ).toEqual(['date || credit || debit || balance']);
+      ).toEqual(["date || credit || debit || balance"]);
     });
 
-    it('returns correct account statement after one deposit transactions', function () {
+    it("returns correct account statement after one deposit transactions", () => {
       transactions = [fakeDepositTransactionToday];
       expect(
         accountStatement.newAccountStatement(
@@ -47,12 +48,12 @@ describe('AccountStatement', function () {
           accountStatementHeaders
         )
       ).toEqual([
-        `date || credit || debit || balance`,
+        "date || credit || debit || balance",
         `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
       ]);
     });
 
-    it('returns correct account statement after two deposit transactions', function () {
+    it("returns correct account statement after two deposit transactions", () => {
       transactions = [fakeDepositTransactionToday, fakeDepositTransactionToday];
       expect(
         accountStatement.newAccountStatement(
@@ -60,13 +61,13 @@ describe('AccountStatement', function () {
           accountStatementHeaders
         )
       ).toEqual([
-        `date || credit || debit || balance`,
+        "date || credit || debit || balance",
         `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 2000.00`,
         `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
       ]);
     });
 
-    it('returns correct account statement after two deposit transactions and 1 withdrawal', function () {
+    it("returns correct account statement after two deposit transactions and 1 withdrawal", () => {
       transactions = [
         fakeDepositTransactionToday,
         fakeDepositTransactionToday,
@@ -78,13 +79,13 @@ describe('AccountStatement', function () {
           accountStatementHeaders
         )
       ).toEqual([
-        `date || credit || debit || balance`,
+        "date || credit || debit || balance",
         `${Util.convertDateToUKFormat(currentDate)} || || 1000.00 || 1000.00`,
         `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 2000.00`,
         `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
       ]);
     });
-    it('returns correct account statement after two deposit transactions on different dates', function () {
+    it("returns correct account statement after two deposit transactions on different dates", () => {
       transactions = [
         fakeDepositTransactionToday,
         fakeDepositTransactionFollowinDay,
@@ -95,20 +96,20 @@ describe('AccountStatement', function () {
           accountStatementHeaders
         )
       ).toEqual([
-        `date || credit || debit || balance`,
+        "date || credit || debit || balance",
         `${Util.convertDateToUKFormat(followingDay)} || 2000.00 || || 3000.00`,
         `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
       ]);
     });
 
-    it('returns correct account statement after three deposit transactions on different dates', function () {
+    it("returns correct account statement after three deposit transactions on different dates", () => {
       transactions = [
         fakeDepositTransactionToday,
         fakeDepositTransactionFollowinDay,
         {
           transactionValue: 2000,
           transactionDate: twoDaysAfter,
-          transactionType: 'deposit',
+          transactionType: "deposit",
         },
       ];
       expect(
@@ -117,21 +118,21 @@ describe('AccountStatement', function () {
           accountStatementHeaders
         )
       ).toEqual([
-        `date || credit || debit || balance`,
+        "date || credit || debit || balance",
         `${Util.convertDateToUKFormat(twoDaysAfter)} || 2000.00 || || 5000.00`,
         `${Util.convertDateToUKFormat(followingDay)} || 2000.00 || || 3000.00`,
         `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
       ]);
     });
 
-    it('returns correct account statement after two deposits and one withdrawal on different dates', function () {
+    it("returns correct account statement after two deposits and one withdrawal on different dates", () => {
       transactions = [
         fakeDepositTransactionToday,
         fakeDepositTransactionFollowinDay,
         {
           transactionValue: -1000,
           transactionDate: twoDaysAfter,
-          transactionType: 'withdrawal',
+          transactionType: "withdrawal",
         },
       ];
       expect(
@@ -140,7 +141,7 @@ describe('AccountStatement', function () {
           accountStatementHeaders
         )
       ).toEqual([
-        `date || credit || debit || balance`,
+        "date || credit || debit || balance",
         `${Util.convertDateToUKFormat(twoDaysAfter)} || || 1000.00 || 2000.00`,
         `${Util.convertDateToUKFormat(followingDay)} || 2000.00 || || 3000.00`,
         `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,

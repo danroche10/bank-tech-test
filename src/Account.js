@@ -1,5 +1,6 @@
-const AccountStatementFactory = require('./factoryClasses/AccountStatementFactory');
-const TransactionFactory = require('./factoryClasses/TransactionFactory');
+/* eslint-disable no-underscore-dangle */
+const AccountStatementFactory = require("./factoryClasses/AccountStatementFactory");
+const TransactionFactory = require("./factoryClasses/TransactionFactory");
 
 class Account {
   constructor(
@@ -14,6 +15,7 @@ class Account {
   }
 
   addTransaction(transactionValue) {
+    // eslint-disable-next-line operator-linebreak
     const newTransaction =
       this._currentTransaction.transactionDetails(transactionValue);
     this._transactionHistory.push(newTransaction);

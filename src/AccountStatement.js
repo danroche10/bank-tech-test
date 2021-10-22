@@ -1,11 +1,13 @@
-const Util = require('./Util');
+/* eslint-disable no-underscore-dangle */
+const Util = require("./Util");
 
 class AccountStatement {
   constructor() {
-    this._accountStatementHeaders = 'date || credit || debit || balance';
+    this._accountStatementHeaders = "date || credit || debit || balance";
   }
+
   newAccountStatement(transactions) {
-    let statement = [];
+    const statement = [];
     let balance = 0;
     transactions.forEach((transaction) => {
       balance += transaction.transactionValue;
@@ -21,6 +23,7 @@ class AccountStatement {
     statement.unshift(this._accountStatementHeaders);
     return statement;
   }
+
   _singleTransactionString(
     transactionDate,
     transactionValue,
@@ -36,7 +39,7 @@ class AccountStatement {
   }
 
   _createTransactionValueString(transactionValue, transactionType) {
-    return transactionType === 'deposit'
+    return transactionType === "deposit"
       ? this._createDepositString(transactionValue)
       : this._createWithdrawalString(transactionValue);
   }

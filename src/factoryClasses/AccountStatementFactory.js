@@ -1,4 +1,4 @@
-const AccountStatement = require('../AccountStatement');
+const AccountStatement = require("../AccountStatement");
 
 class AccountStatementFactory {
   static createAccountStatement() {
