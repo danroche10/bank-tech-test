@@ -10,13 +10,13 @@ describe('Client', function () {
     client = new Client();
   });
 
-  fit('returns correct amount after several deposits and withdrawals', function () {
+  it('returns correct amount after several deposits and withdrawals', function () {
     console.log = jasmine.createSpy('log');
     client.deposit(1000);
-    client.withdraw(1000);
+    client.withdraw(-1000);
     client.deposit(500);
     client.deposit(2000);
-    client.withdraw(1500);
+    client.withdraw(-1500);
     client.printStatement();
     expect(console.log).toHaveBeenCalledWith(
       `date || credit || debit || balance`

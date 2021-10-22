@@ -23,19 +23,47 @@ describe('Client', function () {
     client = new Client(AccountFactory);
   });
 
-  describe('desposits funds into account', function () {
+  describe('deposits funds into account', function () {
     it('calls updateBalance from user class with correct argument', function () {
       spyOn(account, 'addTransaction').and.returnValues(true);
       client.deposit(100);
       expect(account.addTransaction).toHaveBeenCalledWith(100);
+    });
+
+    it('throws error when passed a negative number', function () {
+      spyOn(Math, 'sign').and.returnValues(-1);
+      expect(function () {
+        client.deposit(-100);
+      }).toThrowError('Did not receive a positive number');
+    });
+
+    it('throws error when passed a letter', function () {
+      spyOn(Math, 'sign').and.returnValues(NaN);
+      expect(function () {
+        client.deposit('fffefe');
+      }).toThrowError('Did not receive a positive number');
     });
   });
 
   describe('withdraws funds from account', function () {
     it('calls updateBalance from user class with correct argument', function () {
       spyOn(account, 'addTransaction').and.returnValues(true);
-      client.withdraw(100);
+      client.withdraw(-100);
       expect(account.addTransaction).toHaveBeenCalledWith(-100);
+    });
+
+    it('throws error when passed a positive number', function () {
+      spyOn(Math, 'sign').and.returnValues(1);
+      expect(function () {
+        client.withdraw(100);
+      }).toThrowError('Did not receive a negative number');
+    });
+
+    it('throws error when passed a letter', function () {
+      spyOn(Math, 'sign').and.returnValues(NaN);
+      expect(function () {
+        client.withdraw('fffefe');
+      }).toThrowError('Did not receive a negative number');
     });
   });
 
