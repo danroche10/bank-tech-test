@@ -5,6 +5,7 @@ describe('Client', function () {
   const followingDay = new Date(new Date().getTime() + 86400000);
   const twoDaysAfter = new Date(new Date().getTime() + 86400000 * 2);
   let client;
+  const errorMessage = 'Did not receive a valid Number';
 
   beforeEach(function () {
     account = {
@@ -34,14 +35,21 @@ describe('Client', function () {
       spyOn(Math, 'sign').and.returnValues(-1);
       expect(function () {
         client.deposit(-100);
-      }).toThrowError('Did not receive a positive number');
+      }).toThrowError(errorMessage);
     });
 
     it('throws error when passed a letter', function () {
       spyOn(Math, 'sign').and.returnValues(NaN);
       expect(function () {
         client.deposit('fffefe');
-      }).toThrowError('Did not receive a positive number');
+      }).toThrowError(errorMessage);
+    });
+
+    it('throws error when passed a number with more than one decimal place', function () {
+      spyOn(Math, 'sign').and.returnValues(1);
+      expect(function () {
+        client.deposit(10.0005);
+      }).toThrowError(errorMessage);
     });
   });
 
@@ -56,14 +64,21 @@ describe('Client', function () {
       spyOn(Math, 'sign').and.returnValues(1);
       expect(function () {
         client.withdraw(100);
-      }).toThrowError('Did not receive a negative number');
+      }).toThrowError(errorMessage);
     });
 
     it('throws error when passed a letter', function () {
       spyOn(Math, 'sign').and.returnValues(NaN);
       expect(function () {
         client.withdraw('fffefe');
-      }).toThrowError('Did not receive a negative number');
+      }).toThrowError(errorMessage);
+    });
+
+    it('throws error when passed a number with more than one decimal place', function () {
+      spyOn(Math, 'sign').and.returnValues(1);
+      expect(function () {
+        client.deposit(-10.0005);
+      }).toThrowError(errorMessage);
     });
   });
 
