@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 const Account = require("../src/Account");
 const AccountStatementFactory = require("../src/factoryClasses/AccountStatementFactory");
 const TransactionFactory = require("../src/factoryClasses/TransactionFactory");

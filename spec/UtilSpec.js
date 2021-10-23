@@ -1,6 +1,7 @@
 const convertDateToUKFormat = require("../src/Util");
 
 describe("util", () => {
+  let date;
   describe("returns date in correct format", () => {
     it("", () => {
       date = new Date(2022, 9, 23);

@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable comma-dangle */
 const Client = require("../src/Client");
 const AccountFactory = require("../src/factoryClasses/AccountFactory");
 

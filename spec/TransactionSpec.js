@@ -1,5 +1,6 @@
+const Transaction = require("../src/Transaction");
+
 describe("Transaction", () => {
-  const Transaction = require("../src/Transaction");
   let transaction;
   let transactionValue;
   let currentDate;

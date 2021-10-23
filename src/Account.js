@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable no-underscore-dangle */
 const AccountStatementFactory = require("./factoryClasses/AccountStatementFactory");
 const TransactionFactory = require("./factoryClasses/TransactionFactory");

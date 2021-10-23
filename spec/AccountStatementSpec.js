@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 const AccountStatement = require("../src/AccountStatement");
 const convertDateToUKFormat = require("../src/Util");
 

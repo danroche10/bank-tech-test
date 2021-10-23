@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable no-underscore-dangle */
 const convertDateToUKFormat = require("./Util");
 
@@ -12,7 +13,7 @@ class AccountStatement {
     transactions.forEach((transaction) => {
       balance += transaction.transactionValue;
       statement.unshift(
-        this._singleTransactionString(
+        AccountStatement._singleTransactionString(
           transaction.transactionDate,
           transaction.transactionValue,
           balance,
@@ -24,39 +25,39 @@ class AccountStatement {
     return statement;
   }
 
-  _singleTransactionString(
+  static _singleTransactionString(
     transactionDate,
     transactionValue,
     balance,
     transactionType
   ) {
-    return `${this._createDateString(
+    return `${AccountStatement._createDateString(
       transactionDate
-    )}${this._createTransactionValueString(
+    )}${AccountStatement._createTransactionValueString(
       transactionValue,
       transactionType
-    )}${this._createBalanceString(balance)}`;
+    )}${AccountStatement._createBalanceString(balance)}`;
   }
 
-  _createTransactionValueString(transactionValue, transactionType) {
+  static _createTransactionValueString(transactionValue, transactionType) {
     return transactionType === "deposit"
-      ? this._createDepositString(transactionValue)
-      : this._createWithdrawalString(transactionValue);
+      ? AccountStatement._createDepositString(transactionValue)
+      : AccountStatement._createWithdrawalString(transactionValue);
   }
 
-  _createBalanceString(balance) {
+  static _createBalanceString(balance) {
     return `${balance.toFixed(2)}`;
   }
 
-  _createDateString(transactionDate) {
+  static _createDateString(transactionDate) {
     return `${convertDateToUKFormat(transactionDate)} || `;
   }
 
-  _createDepositString(amount) {
+  static _createDepositString(amount) {
     return `${amount.toFixed(2)} || || `;
   }
 
-  _createWithdrawalString(amount) {
+  static _createWithdrawalString(amount) {
     return `|| ${(-1 * amount).toFixed(2)} || `;
   }
 }

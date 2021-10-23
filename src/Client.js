@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable operator-linebreak */
 /* eslint-disable no-underscore-dangle */
 const AccountFactory = require("./factoryClasses/AccountFactory");
 
@@ -10,8 +12,8 @@ class Client {
 
   deposit(amount) {
     if (
-      this._isAmountPostive(amount) &&
-      this._isCorrectNumberOfDecimalPlaces(amount)
+      Client._isAmountPostive(amount) &&
+      Client._isCorrectNumberOfDecimalPlaces(amount)
     ) {
       this.clientAccount.addTransaction(amount);
     } else {
@@ -21,8 +23,8 @@ class Client {
 
   withdraw(amount) {
     if (
-      this._isAmountNegative(amount) &&
-      this._isCorrectNumberOfDecimalPlaces(amount)
+      Client._isAmountNegative(amount) &&
+      Client._isCorrectNumberOfDecimalPlaces(amount)
     ) {
       this.clientAccount.addTransaction(amount);
     } else {
@@ -32,26 +34,26 @@ class Client {
 
   printStatement() {
     const clientStatement = this.clientAccount.accountStatement();
-    for (let i = 0; i < clientStatement.length; i++) {
+    for (let i = 0; i < clientStatement.length; i += 1) {
       console.log(clientStatement[i]);
     }
   }
 
-  _isCorrectNumberOfDecimalPlaces(amount) {
+  static _isCorrectNumberOfDecimalPlaces(amount) {
     if (Math.abs(amount * 100) % 1 === 0) {
       return true;
     }
     return false;
   }
 
-  _isAmountPostive(amount) {
+  static _isAmountPostive(amount) {
     if (Math.sign(amount) === 1) {
       return true;
     }
     return false;
   }
 
-  _isAmountNegative(amount) {
+  static _isAmountNegative(amount) {
     if (Math.sign(amount) === -1) {
       return true;
     }
