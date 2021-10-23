@@ -1,5 +1,5 @@
 const AccountStatement = require("../src/AccountStatement");
-const Util = require("../src/Util");
+const convertDateToUKFormat = require("../src/Util");
 
 describe("AccountStatement", () => {
   let accountStatement;
@@ -49,7 +49,7 @@ describe("AccountStatement", () => {
         )
       ).toEqual([
         "date || credit || debit || balance",
-        `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
+        `${convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
       ]);
     });
 
@@ -62,8 +62,8 @@ describe("AccountStatement", () => {
         )
       ).toEqual([
         "date || credit || debit || balance",
-        `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 2000.00`,
-        `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
+        `${convertDateToUKFormat(currentDate)} || 1000.00 || || 2000.00`,
+        `${convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
       ]);
     });
 
@@ -80,9 +80,9 @@ describe("AccountStatement", () => {
         )
       ).toEqual([
         "date || credit || debit || balance",
-        `${Util.convertDateToUKFormat(currentDate)} || || 1000.00 || 1000.00`,
-        `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 2000.00`,
-        `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
+        `${convertDateToUKFormat(currentDate)} || || 1000.00 || 1000.00`,
+        `${convertDateToUKFormat(currentDate)} || 1000.00 || || 2000.00`,
+        `${convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
       ]);
     });
     it("returns correct account statement after two deposit transactions on different dates", () => {
@@ -97,8 +97,8 @@ describe("AccountStatement", () => {
         )
       ).toEqual([
         "date || credit || debit || balance",
-        `${Util.convertDateToUKFormat(followingDay)} || 2000.00 || || 3000.00`,
-        `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
+        `${convertDateToUKFormat(followingDay)} || 2000.00 || || 3000.00`,
+        `${convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
       ]);
     });
 
@@ -119,9 +119,9 @@ describe("AccountStatement", () => {
         )
       ).toEqual([
         "date || credit || debit || balance",
-        `${Util.convertDateToUKFormat(twoDaysAfter)} || 2000.00 || || 5000.00`,
-        `${Util.convertDateToUKFormat(followingDay)} || 2000.00 || || 3000.00`,
-        `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
+        `${convertDateToUKFormat(twoDaysAfter)} || 2000.00 || || 5000.00`,
+        `${convertDateToUKFormat(followingDay)} || 2000.00 || || 3000.00`,
+        `${convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
       ]);
     });
 
@@ -142,9 +142,9 @@ describe("AccountStatement", () => {
         )
       ).toEqual([
         "date || credit || debit || balance",
-        `${Util.convertDateToUKFormat(twoDaysAfter)} || || 1000.00 || 2000.00`,
-        `${Util.convertDateToUKFormat(followingDay)} || 2000.00 || || 3000.00`,
-        `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
+        `${convertDateToUKFormat(twoDaysAfter)} || || 1000.00 || 2000.00`,
+        `${convertDateToUKFormat(followingDay)} || 2000.00 || || 3000.00`,
+        `${convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`,
       ]);
     });
   });

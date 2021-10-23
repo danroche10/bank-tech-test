@@ -1,5 +1,5 @@
 const Client = require("../src/Client");
-const Util = require("../src/Util");
+const convertDateToUKFormat = require("../src/Util");
 
 describe("Client", () => {
   let client;
@@ -22,19 +22,19 @@ describe("Client", () => {
       "date || credit || debit || balance"
     );
     expect(console.log).toHaveBeenCalledWith(
-      `${Util.convertDateToUKFormat(currentDate)} || || 1500.00 || 1000.00`
+      `${convertDateToUKFormat(currentDate)} || || 1500.00 || 1000.00`
     );
     expect(console.log).toHaveBeenCalledWith(
-      `${Util.convertDateToUKFormat(currentDate)} || 2000.00 || || 2500.00`
+      `${convertDateToUKFormat(currentDate)} || 2000.00 || || 2500.00`
     );
     expect(console.log).toHaveBeenCalledWith(
-      `${Util.convertDateToUKFormat(currentDate)} || 500.00 || || 500.00`
+      `${convertDateToUKFormat(currentDate)} || 500.00 || || 500.00`
     );
     expect(console.log).toHaveBeenCalledWith(
-      `${Util.convertDateToUKFormat(currentDate)} || || 1000.00 || 0.00`
+      `${convertDateToUKFormat(currentDate)} || || 1000.00 || 0.00`
     );
     expect(console.log).toHaveBeenCalledWith(
-      `${Util.convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`
+      `${convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`
     );
   });
 });

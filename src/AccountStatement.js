@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-const Util = require("./Util");
+const convertDateToUKFormat = require("./Util");
 
 class AccountStatement {
   constructor() {
@@ -49,7 +49,7 @@ class AccountStatement {
   }
 
   _createDateString(transactionDate) {
-    return `${Util.convertDateToUKFormat(transactionDate)} || `;
+    return `${convertDateToUKFormat(transactionDate)} || `;
   }
 
   _createDepositString(amount) {
