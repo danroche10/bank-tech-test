@@ -12,24 +12,22 @@ class Client {
 
   deposit(amount) {
     if (
-      Client._isAmountPostive(amount) &&
-      Client._isCorrectNumberOfDecimalPlaces(amount)
+      Client._isNotPostive(amount) ||
+      Client._isNotCorrectNumberOfDecimalPlaces(amount)
     ) {
-      this.clientAccount.addTransaction(amount);
-    } else {
       throw new Error(this.errorMessage);
     }
+    this.clientAccount.addTransaction(amount);
   }
 
   withdraw(amount) {
     if (
-      Client._isAmountNegative(amount) &&
-      Client._isCorrectNumberOfDecimalPlaces(amount)
+      Client._isNotNegative(amount) ||
+      Client._isNotCorrectNumberOfDecimalPlaces(amount)
     ) {
-      this.clientAccount.addTransaction(amount);
-    } else {
       throw new Error(this.errorMessage);
     }
+    this.clientAccount.addTransaction(amount);
   }
 
   printStatement() {
@@ -39,25 +37,25 @@ class Client {
     }
   }
 
-  static _isCorrectNumberOfDecimalPlaces(amount) {
+  static _isNotCorrectNumberOfDecimalPlaces(amount) {
     if (Math.abs(amount * 100) % 1 === 0) {
-      return true;
+      return false;
     }
-    return false;
+    return true;
   }
 
-  static _isAmountPostive(amount) {
+  static _isNotPostive(amount) {
     if (Math.sign(amount) === 1) {
-      return true;
+      return false;
     }
-    return false;
+    return true;
   }
 
-  static _isAmountNegative(amount) {
+  static _isNotNegative(amount) {
     if (Math.sign(amount) === -1) {
-      return true;
+      return false;
     }
-    return false;
+    return true;
   }
 }
 
