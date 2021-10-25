@@ -1,17 +1,15 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable no-underscore-dangle */
-const AccountStatementFactory = require("./factoryClasses/AccountStatementFactory");
-const TransactionFactory = require("./factoryClasses/TransactionFactory");
+const AccountStatement = require("./AccountStatement");
+const Transaction = require("./Transaction");
 
 class Account {
   constructor(
-    accountStatementFactory = AccountStatementFactory,
-    transactionFactory = TransactionFactory
+    accountStatement = new AccountStatement(),
+    transaction = new Transaction()
   ) {
-    this._accountStatementClass = accountStatementFactory;
-    this._transactionClass = transactionFactory;
-    this._account = this._accountStatementClass.createAccountStatement();
-    this._currentTransaction = this._transactionClass.createTransaction();
+    this._accountStatement = accountStatement;
+    this._currentTransaction = transaction;
     this._transactionHistory = [];
   }
 
@@ -23,7 +21,7 @@ class Account {
   }
 
   accountStatement() {
-    return this._account.newAccountStatement(this._transactionHistory);
+    return this._accountStatement.newAccountStatement(this._transactionHistory);
   }
 }
 

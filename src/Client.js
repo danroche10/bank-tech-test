@@ -60,6 +60,3 @@ class Client {
 }
 
 module.exports = Client;
-
-// let client = new Client();
-// client.deposit(100.0);
