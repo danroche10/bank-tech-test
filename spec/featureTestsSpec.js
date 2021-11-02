@@ -8,7 +8,7 @@ describe("Client", () => {
   let currentDate;
 
   beforeEach(() => {
-    currentDate = new Date();
+    currentDate = convertDateToUKFormat(new Date());
     client = new Client();
   });
 
@@ -24,19 +24,19 @@ describe("Client", () => {
       "date || credit || debit || balance"
     );
     expect(console.log).toHaveBeenCalledWith(
-      `${convertDateToUKFormat(currentDate)} || || 1500.00 || 1000.00`
+      `${currentDate} || || 1500.00 || 1000.00`
     );
     expect(console.log).toHaveBeenCalledWith(
-      `${convertDateToUKFormat(currentDate)} || 2000.00 || || 2500.00`
+      `${currentDate} || 2000.00 || || 2500.00`
     );
     expect(console.log).toHaveBeenCalledWith(
-      `${convertDateToUKFormat(currentDate)} || 500.00 || || 500.00`
+      `${currentDate} || 500.00 || || 500.00`
     );
     expect(console.log).toHaveBeenCalledWith(
-      `${convertDateToUKFormat(currentDate)} || || 1000.00 || 0.00`
+      `${currentDate} || || 1000.00 || 0.00`
     );
     expect(console.log).toHaveBeenCalledWith(
-      `${convertDateToUKFormat(currentDate)} || 1000.00 || || 1000.00`
+      `${currentDate} || 1000.00 || || 1000.00`
     );
   });
 });

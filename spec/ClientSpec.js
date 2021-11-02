@@ -34,21 +34,18 @@ describe("Client", () => {
     });
 
     it("throws error when passed a negative number", () => {
-      spyOn(Math, "sign").and.returnValues(-1);
       expect(() => {
         client.deposit(-100);
       }).toThrowError(errorMessage);
     });
 
     it("throws error when passed a letter", () => {
-      spyOn(Math, "sign").and.returnValues(NaN);
       expect(() => {
         client.deposit("fffefe");
       }).toThrowError(errorMessage);
     });
 
     it("throws error when passed a number with more than one decimal place", () => {
-      spyOn(Math, "sign").and.returnValues(1);
       expect(() => {
         client.deposit(10.0005);
       }).toThrowError(errorMessage);
@@ -63,21 +60,18 @@ describe("Client", () => {
     });
 
     it("throws error when passed a positive number", () => {
-      spyOn(Math, "sign").and.returnValues(1);
       expect(() => {
         client.withdraw(100);
       }).toThrowError(errorMessage);
     });
 
     it("throws error when passed a letter", () => {
-      spyOn(Math, "sign").and.returnValues(NaN);
       expect(() => {
         client.withdraw("fffefe");
       }).toThrowError(errorMessage);
     });
 
     it("throws error when passed a number with more than one decimal place", () => {
-      spyOn(Math, "sign").and.returnValues(1);
       expect(() => {
         client.deposit(-10.0005);
       }).toThrowError(errorMessage);
