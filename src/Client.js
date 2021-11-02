@@ -1,12 +1,11 @@
 /* eslint-disable no-console */
 /* eslint-disable operator-linebreak */
 /* eslint-disable no-underscore-dangle */
-const AccountFactory = require("./factoryClasses/AccountFactory");
+const Account = require("./Account");
 
 class Client {
-  constructor(accountFactory = AccountFactory) {
-    this.accountClass = accountFactory;
-    this.clientAccount = this.accountClass.createAccount();
+  constructor(account = new Account()) {
+    this._account = account;
     this.errorMessage = "Did not receive a valid Number";
   }
 
@@ -17,7 +16,7 @@ class Client {
     ) {
       throw new Error(this.errorMessage);
     }
-    this.clientAccount.addTransaction(amount);
+    this._account.addTransaction(amount);
   }
 
   withdraw(amount) {
@@ -27,11 +26,11 @@ class Client {
     ) {
       throw new Error(this.errorMessage);
     }
-    this.clientAccount.addTransaction(amount);
+    this._account.addTransaction(amount);
   }
 
   printStatement() {
-    const clientStatement = this.clientAccount.accountStatement();
+    const clientStatement = this._account.accountStatement();
     for (let i = 0; i < clientStatement.length; i += 1) {
       console.log(clientStatement[i]);
     }

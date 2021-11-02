@@ -1,36 +1,33 @@
 /* eslint-disable no-console */
 /* eslint-disable comma-dangle */
 const Client = require("../src/Client");
-const AccountFactory = require("../src/factoryClasses/AccountFactory");
+const Account = require("../src/Account");
 
 describe("Client", () => {
   const currentDate = new Date();
   const followingDay = new Date(new Date().getTime() + 86400000);
   const twoDaysAfter = new Date(new Date().getTime() + 86400000 * 2);
-  let client;
-  let account;
+  const mockAccountStatement = [
+    "date || credit || debit || balance",
+    `${currentDate} || 2000.00 || || 2000.00`,
+    `${currentDate} || || 1000.00 || 1000.00`,
+    `${followingDay} || || 1000.00 || 1000.00`,
+    `${twoDaysAfter} || 2000.00 || || 2000.00`,
+  ];
   const errorMessage = "Did not receive a valid Number";
+  let client;
+  let realAccount;
 
   beforeEach(() => {
-    account = {
-      addTransaction: () => {},
-      accountStatement: () => [
-        "date || credit || debit || balance",
-        `${currentDate} || 2000.00 || || 2000.00`,
-        `${currentDate} || || 1000.00 || 1000.00`,
-        `${followingDay} || || 1000.00 || 1000.00`,
-        `${twoDaysAfter} || 2000.00 || || 2000.00`,
-      ],
-    };
-    spyOn(AccountFactory, "createAccount").and.returnValue(account);
-    client = new Client(AccountFactory);
+    realAccount = new Account();
+    client = new Client(realAccount);
   });
 
   describe("deposits funds into account", () => {
     it("calls updateBalance from user class with correct argument", () => {
-      spyOn(account, "addTransaction").and.returnValues(true);
+      spyOn(realAccount, "addTransaction").and.returnValues(true);
       client.deposit(100);
-      expect(account.addTransaction).toHaveBeenCalledWith(100);
+      expect(realAccount.addTransaction).toHaveBeenCalledWith(100);
     });
 
     it("throws error when passed a negative number", () => {
@@ -54,9 +51,9 @@ describe("Client", () => {
 
   describe("withdraws funds from account", () => {
     it("calls updateBalance from user class with correct argument", () => {
-      spyOn(account, "addTransaction").and.returnValues(true);
+      spyOn(realAccount, "addTransaction").and.returnValues(true);
       client.withdraw(-100);
-      expect(account.addTransaction).toHaveBeenCalledWith(-100);
+      expect(realAccount.addTransaction).toHaveBeenCalledWith(-100);
     });
 
     it("throws error when passed a positive number", () => {
@@ -80,9 +77,11 @@ describe("Client", () => {
 
   describe("console logs client account statement in terminal", () => {
     it("it calls accountStatement method from Account Class", () => {
-      spyOn(account, "accountStatement").and.returnValues(true);
+      spyOn(realAccount, "accountStatement").and.returnValue(
+        mockAccountStatement
+      );
       client.printStatement();
-      expect(account.accountStatement).toHaveBeenCalled();
+      expect(realAccount.accountStatement).toHaveBeenCalled();
     });
 
     it("console.logs account statement headers", () => {
@@ -95,6 +94,9 @@ describe("Client", () => {
 
     it("console.logs first row of account statement", () => {
       console.log = jasmine.createSpy("log");
+      spyOn(realAccount, "accountStatement").and.returnValue(
+        mockAccountStatement
+      );
       client.printStatement();
       expect(console.log).toHaveBeenCalledWith(
         `${currentDate} || 2000.00 || || 2000.00`
@@ -103,6 +105,9 @@ describe("Client", () => {
 
     it("console.logs second row of account statement", () => {
       console.log = jasmine.createSpy("log");
+      spyOn(realAccount, "accountStatement").and.returnValue(
+        mockAccountStatement
+      );
       client.printStatement();
       expect(console.log).toHaveBeenCalledWith(
         `${currentDate} || || 1000.00 || 1000.00`
@@ -111,6 +116,9 @@ describe("Client", () => {
 
     it("console.logs third row of account statement", () => {
       console.log = jasmine.createSpy("log");
+      spyOn(realAccount, "accountStatement").and.returnValue(
+        mockAccountStatement
+      );
       client.printStatement();
       expect(console.log).toHaveBeenCalledWith(
         `${followingDay} || || 1000.00 || 1000.00`
@@ -119,6 +127,9 @@ describe("Client", () => {
 
     it("console.logs fourth row of account statement", () => {
       console.log = jasmine.createSpy("log");
+      spyOn(realAccount, "accountStatement").and.returnValue(
+        mockAccountStatement
+      );
       client.printStatement();
       expect(console.log).toHaveBeenCalledWith(
         `${twoDaysAfter} || 2000.00 || || 2000.00`
