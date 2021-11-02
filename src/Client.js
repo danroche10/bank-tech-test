@@ -59,3 +59,9 @@ class Client {
 }
 
 module.exports = Client;
+
+let client;
+client = new Client();
+client.deposit(1000);
+client.withdraw(-1000);
+client.printStatement();

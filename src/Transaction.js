@@ -1,14 +1,18 @@
 /* eslint-disable no-underscore-dangle */
 class Transaction {
-  constructor(transactionDate = new Date()) {
+  constructor(transactionDate, transactionValue) {
     this._transactionDate = transactionDate;
+    this._transactionValue = transactionValue;
+    this._transactionType = Transaction._transactionType(
+      this._transactionValue
+    );
   }
 
-  transactionDetails(transactionValue) {
+  transactionDetails() {
     return {
-      transactionValue,
+      transactionValue: this._transactionValue,
       transactionDate: this._transactionDate,
-      transactionType: Transaction._transactionType(transactionValue),
+      transactionType: this._transactionType,
     };
   }
 

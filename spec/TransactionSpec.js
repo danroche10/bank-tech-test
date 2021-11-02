@@ -7,32 +7,30 @@ describe("Transaction", () => {
 
   beforeEach(() => {
     currentDate = new Date();
-    transaction = new Transaction(currentDate);
   });
 
   describe("returns object for a transaction specifying the value, date and type", () => {
     it("correctly shows the value date and type for one deposit transaction", () => {
-      transactionValue = 500;
+      transaction = new Transaction(currentDate, 100);
       expect(transaction.transactionDetails(transactionValue)).toEqual({
-        transactionValue,
+        transactionValue: 100,
         transactionDate: currentDate,
         transactionType: "deposit",
       });
     });
     it("correctly shows the value date and type for one withdrawal transaction", () => {
-      transactionValue = -500;
+      transaction = new Transaction(currentDate, -100);
       expect(transaction.transactionDetails(transactionValue)).toEqual({
-        transactionValue,
+        transactionValue: -100,
         transactionDate: currentDate,
         transactionType: "withdrawal",
       });
     });
 
     it("shows the correct date when a custom one is entered that is not today", () => {
-      transaction = new Transaction("10/5/2021");
-      transactionValue = 500;
+      transaction = new Transaction("10/5/2021", 100);
       expect(transaction.transactionDetails(transactionValue)).toEqual({
-        transactionValue,
+        transactionValue: 100,
         transactionDate: "10/5/2021",
         transactionType: "deposit",
       });

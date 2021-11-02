@@ -7,11 +7,12 @@ describe("Account", () => {
   let account;
   let realTransaction;
   let realAccountStatement;
+  let transaction;
 
   beforeEach(() => {
-    realTransaction = new Transaction();
+    transaction = new Transaction("10/10/2021", 100);
     realAccountStatement = new AccountStatement();
-    account = new Account(realAccountStatement, realTransaction);
+    account = new Account(realAccountStatement, transaction);
   });
 
   describe("call newAccountStatement from accountStatement class with transaction history as arg", () => {
@@ -41,10 +42,10 @@ describe("Account", () => {
 
     it("calls newAccountStatement with correct array as arg (including transaction Value and date) after 2 deposit transactions", () => {
       spyOn(realAccountStatement, "newAccountStatement").and.returnValues(true);
-      spyOn(realTransaction, "transactionDetails").and.returnValue(
+      spyOn(transaction, "transactionDetails").and.returnValue([
         fakeDepositTransaction,
-        fakeDepositTransaction
-      );
+        fakeDepositTransaction,
+      ]);
       account.addTransaction(1000);
       account.addTransaction(1000);
       account.accountStatement();
