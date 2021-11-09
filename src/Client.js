@@ -60,8 +60,10 @@ class Client {
 
 module.exports = Client;
 
-let client;
-client = new Client();
+const client = new Client();
 client.deposit(1000);
+client.deposit(1500);
+client.deposit(100);
 client.withdraw(-1000);
+client.withdraw(-100);
 client.printStatement();
