@@ -17,19 +17,19 @@ describe("AccountStatement", () => {
     const followingDay = new Date(currentDate.getTime() + 86400000);
     const twoDaysAfter = new Date(currentDate.getTime() + 86400000 * 2);
     const fakeDepositTransactionToday = {
-      transactionValue: 1000,
-      transactionDate: currentDate,
-      transactionType: "deposit",
+      _transactionValue: 1000,
+      _transactionDate: currentDate,
+      _transactionType: "deposit",
     };
     const fakeDepositTransactionFollowinDay = {
-      transactionValue: 2000,
-      transactionDate: followingDay,
-      transactionType: "deposit",
+      _transactionValue: 2000,
+      _transactionDate: followingDay,
+      _transactionType: "deposit",
     };
     const fakeWithdrawalTransactionToday = {
-      transactionValue: -1000,
-      transactionDate: currentDate,
-      transactionType: "withdrawal",
+      _transactionValue: -1000,
+      _transactionDate: currentDate,
+      _transactionType: "withdrawal",
     };
     it("returns empty account statement after zero transactions", () => {
       transactions = [];
@@ -108,9 +108,9 @@ describe("AccountStatement", () => {
         fakeDepositTransactionToday,
         fakeDepositTransactionFollowinDay,
         {
-          transactionValue: 2000,
-          transactionDate: twoDaysAfter,
-          transactionType: "deposit",
+          _transactionValue: 2000,
+          _transactionDate: twoDaysAfter,
+          _transactionType: "deposit",
         },
       ];
       expect(
@@ -131,9 +131,9 @@ describe("AccountStatement", () => {
         fakeDepositTransactionToday,
         fakeDepositTransactionFollowinDay,
         {
-          transactionValue: -1000,
-          transactionDate: twoDaysAfter,
-          transactionType: "withdrawal",
+          _transactionValue: -1000,
+          _transactionDate: twoDaysAfter,
+          _transactionType: "withdrawal",
         },
       ];
       expect(

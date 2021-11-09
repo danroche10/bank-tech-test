@@ -19,9 +19,7 @@ class Account {
       new Date(),
       transactionValue
     );
-    const transactionDetails =
-      newTransaction.transactionDetails(transactionValue);
-    this._transactionHistory.push(transactionDetails);
+    this._transactionHistory.push(newTransaction);
   }
 
   accountStatement() {

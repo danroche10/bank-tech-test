@@ -8,14 +8,6 @@ class Transaction {
     );
   }
 
-  transactionDetails() {
-    return {
-      transactionValue: this._transactionValue,
-      transactionDate: this._transactionDate,
-      transactionType: this._transactionType,
-    };
-  }
-
   static _transactionType(transactionValue) {
     return transactionValue > 0 ? "deposit" : "withdrawal";
   }

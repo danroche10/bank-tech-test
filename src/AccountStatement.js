@@ -11,13 +11,13 @@ class AccountStatement {
     const statement = [];
     let balance = 0;
     transactions.forEach((transaction) => {
-      balance += transaction.transactionValue;
+      balance += transaction._transactionValue;
       statement.unshift(
         AccountStatement._singleTransactionString(
-          transaction.transactionDate,
-          transaction.transactionValue,
+          transaction._transactionDate,
+          transaction._transactionValue,
           balance,
-          transaction.transactionType
+          transaction._transactionType
         )
       );
     });
